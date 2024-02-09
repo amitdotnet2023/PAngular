@@ -1,0 +1,113 @@
+<div class="container" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <span class="bi bi-pencil"></span> Add Todo List
+            </button>
+        </div>
+    </div>
+    &nbsp;
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Active</th>
+                <th>Created Date</th>
+                <th>Last Modified Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todoItem of todolistData.data">
+                <td>{{ todoItem.id }}</td>
+                <td>{{ todoItem.name }}</td>
+                <td>{{ todoItem.email }}</td>
+                <td>{{ todoItem.number }}</td>
+                <td>{{ todoItem.isActive ? 'Active' : 'Inactive' }}</td>
+                <td>{{ todoItem.createdDate }}</td>
+                <td>{{ todoItem.lastModifiedDate }}</td>
+                <td>
+                    <!-- Edit Icon -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="GetTodoByIdCom(todoItem.id)">
+                        <span class="bi bi-pencil"></span> Edit
+                    </button>
+                    &nbsp;
+                    <!-- Delete Icon -->
+
+                    <button type="button" class="btn btn-danger" (click)="DeleteTodoListCom(todoItem.id)">
+                        <span class="bi bi-trash"></span> Delete
+                    </button>
+                </td>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Todo List</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="todoAddForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" formControlName="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" formControlName="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Number:</label>
+                        <input type="text" id="number" formControlName="number" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" (click)="CreateTodoListCom()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Todo List</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="todoEditForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" formControlName="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" formControlName="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Number:</label>
+                        <input type="text" id="number" formControlName="number" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" (click)="UpdateTodoListCom()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
